@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+  <script src="hello.js"></script>
+</head>
+<body>
+
+    <script>
+
+      	Module.onRuntimeInitialized = function() {
+	    	var pointer = Module.addFunction(function(privKey, cert) { 
+	  			console.log('Private Key'); 
+	  			console.log(UTF8ToString(privKey)); 
+	  			console.log('Certificate'); 
+	  			console.log(UTF8ToString(cert)); 
+			},"vii");
+		    Module.ccall('doTest', 'number', ['pointer'], [pointer]);
+      	};
+
+    </script>
+</body>
+</html>
