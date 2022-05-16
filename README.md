@@ -15,8 +15,8 @@ The key generation is quite slow and uses seed collection from the browser and W
 Compilation
 -----------
 
-1) Install ![emscripten](https://emscripten.org/) and follow the ![Getting Started](https://emscripten.org/docs/getting_started/index.html) to set it up.
-2) Checkout ![OpenSSL](https://github.com/openssl/openssl) and checkout the latest release. When you go in the openssl directory, check that you emscripten 'emcc' works.
+1) Install [emscripten](https://emscripten.org/) and follow the [Getting Started](https://emscripten.org/docs/getting_started/index.html) to set it up.
+2) Checkout [OpenSSL](https://github.com/openssl/openssl) and checkout the latest release. When you go in the openssl directory, check that you emscripten 'emcc' works.
 3) In the directory of this project is a shell script to configure and compile Openssl. Copy the script into the openssl directory and run it.
 
 It will create in the openssl-directory a libssl.a and a libcrypto.a file, which you can use build your openssl based WASM projects.
@@ -37,4 +37,4 @@ You'll need python to test it. The project has a small server (server.py). Start
 python server.py
 ```
 
-Goto ![http://localhost:8000/index.html](http://localhost:8000/index.html) and open your javascript console. You'll have to wait a minute or 2 to let the script generate the keys. The signing is way more faster.
+Goto [http://localhost:8000/index.html](http://localhost:8000/index.html) and open your javascript console. You'll have to wait a minute or 2 to let the script generate the keys. The signing is way more faster.
