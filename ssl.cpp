@@ -162,52 +162,52 @@ bool write_to_buffer(EVP_PKEY * pkey, X509 * x509, void(*f)(char *cert, char *pk
 
 extern "C" {
 
-int doTest(void(*f)(char *cert, char *pkey))
-{
-    std::cout << OpenSSL_version(OPENSSL_FULL_VERSION_STRING) << std::endl;
-
-    if (!bio_err) {
-        bio_err = BIO_new_fp(stderr, BIO_NOCLOSE);
-    }
-    if (!bio_out) {
-        bio_out = BIO_new_fp(stdout, BIO_NOCLOSE);
-    }
-
-    /* Generate the key. */
-    std::cout << "Generating RSA key..." << std::endl;
-    
-    EVP_PKEY * pkey = generate_key(4096);
-    if(!pkey)
-        return 1;
-    
-    /* Generate the certificate. */
-    std::cout << "Generating x509 certificate..." << std::endl;
-    
-    X509 * x509 = generate_x509(pkey, (char *)"Test User 1");
-    if(!x509)
+    int doTest(void(*f)(char *cert, char *pkey))
     {
+        std::cout << OpenSSL_version(OPENSSL_FULL_VERSION_STRING) << std::endl;
+
+        if (!bio_err) {
+            bio_err = BIO_new_fp(stderr, BIO_NOCLOSE);
+        }
+        if (!bio_out) {
+            bio_out = BIO_new_fp(stdout, BIO_NOCLOSE);
+        }
+
+        /* Generate the key. */
+        std::cout << "Generating RSA key..." << std::endl;
+        
+        EVP_PKEY * pkey = generate_key(4096);
+        if(!pkey)
+            return 1;
+        
+        /* Generate the certificate. */
+        std::cout << "Generating x509 certificate..." << std::endl;
+        
+        X509 * x509 = generate_x509(pkey, (char *)"Test User 1");
+        if(!x509)
+        {
+            EVP_PKEY_free(pkey);
+            return 1;
+        }
+        
+        /* Write the private key and certificate out to disk. */
+        std::cout << "Writing key and certificate to stdout..." << std::endl;
+        
+        bool ret1 = 1; // write_to_stdout(pkey, x509);
+
+        bool ret2 = write_to_buffer(pkey, x509, f);
+
         EVP_PKEY_free(pkey);
-        return 1;
+        X509_free(x509);
+        
+        if(ret1 && ret2)
+        {
+            std::cout << "Success!" << std::endl;
+            return 0;
+        }
+        else
+            return 1;
     }
-    
-    /* Write the private key and certificate out to disk. */
-    std::cout << "Writing key and certificate to stdout..." << std::endl;
-    
-    bool ret1 = 1; // write_to_stdout(pkey, x509);
-
-    bool ret2 = write_to_buffer(pkey, x509, f);
-
-    EVP_PKEY_free(pkey);
-    X509_free(x509);
-    
-    if(ret1 && ret2)
-    {
-        std::cout << "Success!" << std::endl;
-        return 0;
-    }
-    else
-        return 1;
-}
 
 }
 

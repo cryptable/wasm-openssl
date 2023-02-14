@@ -28,6 +28,6 @@ echo  $OSTYPE | grep -i darwin > /dev/null 2> /dev/null
   gcc \
   --openssldir=/tmp \
   -D__STDC_NO_ATOMICS__=1 \
-  no-dynamic-engine no-dgram no-sock no-srtp no-err no-ocsp no-psk no-ts
+  no-dynamic-engine no-dgram no-sock no-srtp no-err no-ocsp no-psk no-ts no-ssl2 no-ssl3 no-idea no-asm no-dtls no-dtls1 no-weak-ssl-ciphers no-err no-hw no-engine no-threads
 
 PATH=$TOOLCHAIN_PATH:$PATH emmake make build_libs
