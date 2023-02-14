@@ -25,7 +25,7 @@ echo  $OSTYPE | grep -i darwin > /dev/null 2> /dev/null
 # emconfigure ./config purify --openssldir=/tmp --api=1.1.0 -D__STDC_NO_ATOMICS__=1 no-dso no-dgram no-sock no-srtp no-stdio no-ui no-err no-ocsp no-psk no-stdio no-tests no-ts
 
 ./Configure \
-  purify \
+  gcc \
   --openssldir=/tmp \
   -D__STDC_NO_ATOMICS__=1 \
   no-dynamic-engine no-dgram no-sock no-srtp no-err no-ocsp no-psk no-ts
